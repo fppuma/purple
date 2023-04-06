@@ -11,11 +11,11 @@ Output Example
 The following 1 profile is active: "int"
 ```
 
-# Read Configuration Values
+## Read Configuration Values
 1. Create a class with Configuration Annotation. (configuration package)
 2. Define a prefix
 3. Go on this class as POJO
-4. Print the read values by a Controller
+4. Print the read values by a **RestController**.
 
 ```java
 @Component
@@ -32,6 +32,45 @@ public class WeatherServiceConfiguration {
 weather-service.url=https://github.com/weather
 weather-service.username=user01
 weather-service.key=123
+```
+
+```java
+@RestController
+public class WeatherController {
+  @Autowired
+  WeatherServiceConfiguration configuration;
+
+  @RequestMapping("weather")
+  public WeatherServiceConfiguration getConfiguration() {
+    return configuration;
+  }
+}
+```
+
+Start the application and check this url:
+```
+http://localhost:8080/weather
+```
+
+## Controller
+Instead of RestController, create a **Controller**.
+Add **@ResponseBody** in the endpoint.
+
+```java
+@Controller
+public class HelloController {
+  
+  @GetMapping("hello")
+  @ResponseBody
+  public String getMessage() {
+    return "Hello World!!!";
+  }
+}
+```
+
+Start the application and check this url:
+```
+http://localhost:8080/hello
 ```
 
 ## Actuator
