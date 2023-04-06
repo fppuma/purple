@@ -33,3 +33,28 @@ weather-service.url=https://github.com/weather
 weather-service.username=user01
 weather-service.key=123
 ```
+
+## Actuator
+Add this in the pom.xml
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+Start the application and check this url:
+```
+http://localhost:8080/actuator
+```
+
+The url with slash at the end doesn't work:
+```
+http://localhost:8080/actuator/
+```
+
+To see more endpoint like configprops, env, loggers, metrics, etc.  
+In the application.properties, add this configuration:
+```
+management.endpoints.web.exposure.include=*
+```
