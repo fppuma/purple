@@ -126,3 +126,31 @@ public String welcome() {
 }
 ```
 
+Start the application and check this url:
+```
+http://localhost:8080/welcome
+```
+
+## Reading a Query Param
+- Create a LoginController
+- Add a method loginForm
+```java
+@GetMapping("login")
+  public String loginForm(@RequestParam String name, ModelMap model) {
+    model.put("name", name);
+    return "login";
+  }
+```
+
+```html
+<body>
+  <p style="color: blue;">Welcome ${name} </p> 
+
+</body>
+```
+
+Start the application and check this url:
+```
+http://localhost:8080/login?name=Frank
+```
+
