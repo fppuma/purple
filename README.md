@@ -92,8 +92,37 @@ The url with slash at the end doesn't work:
 http://localhost:8080/actuator/
 ```
 
-To see more endpoint like configprops, env, loggers, metrics, etc.  
+To see more endpoints like configprops, env, loggers, metrics, etc.  
 In the application.properties, add this configuration:
 ```
 management.endpoints.web.exposure.include=*
 ```
+
+## Redirect to JSP
+
+```xml
+<dependency>
+  <groupId>org.apache.tomcat.embed</groupId>
+  <artifactId>tomcat-embed-jasper</artifactId>
+  <scope>provided</scope>
+</dependency>
+```
+
+Add in the application.properties. 
+For prefix, pay attention to the slash at the end.
+```
+spring.mvc.view.prefix=/WEB-INF/jsp/
+spring.mvc.view.suffix=.jsp
+```
+
+In resources folder
+- Create a folder: META-INF/resources/WEB-INF/jsp
+- Inside this folder, create the file: welcome.jsp
+- Add a method in HelloController.java
+```java
+@GetMapping("welcome")
+public String welcome() {
+  return "welcome";
+}
+```
+
